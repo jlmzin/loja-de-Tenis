@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>JUNOIR | Tênis Nike</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Manrope:wght@400;600;800&display=swap"
+    />
+    <link rel="stylesheet" href="style.css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="wrap bar">
+        <span class="brand">JUNOIR</span>
+        <button class="cartbtn" id="open" aria-label="Abrir carrinho">
+          Carrinho <b id="n">0</b>
+        </button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1>Nike para cada passo.</h1>
+          <p>
+            Corrida, rua ou quadra: escolha o tênis, o tamanho e a cor. Só
+            mostramos o que está disponível no seu número.
+          </p>
+          <a class="cta" href="#vitrine">Ver tênis Nike</a>
+        </div>
+        <div class="stage" aria-live="polite">
+          <div id="heroShoe"></div>
+          <div
+            class="sw"
+            id="heroSw"
+            role="group"
+            aria-label="Tênis em destaque"
+          ></div>
+        </div>
+      </section>
+      <section class="perks">
+        <div><strong>Frete grátis</strong>em compras acima de R$ 399</div>
+        <div>
+          <strong>Troca em 30 dias</strong>se não servir, você troca sem custo
+        </div>
+        <div><strong>Até 10x sem juros</strong>no cartão de crédito</div>
+      </section>
+
+      <section id="vitrine">
+        <h2 style="font-size: clamp(44px, 7vw, 80px)">Vitrine Nike</h2>
+        <div class="filters">
+          <div class="fg">
+            <span id="lt">Tamanho</span>
+            <div class="chips" id="fs" role="group" aria-labelledby="lt"></div>
+          </div>
+          <div class="fg">
+            <span id="lc">Cor</span>
+            <div class="chips" id="fc" role="group" aria-labelledby="lc"></div>
+          </div>
+          <button class="clear" id="clr">Limpar filtros</button>
+        </div>
+        <p class="count" id="cnt" aria-live="polite"></p>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        JUNOIR: loja demonstrativa. Nike e Jordan são marcas registradas de seus
+        respectivos titulares.
+      </div>
+    </footer>
+
+    <div class="shade" id="shade"></div>
+    <aside id="drawer" aria-label="Carrinho de compras" aria-hidden="true">
+      <div class="ah">
+        <h2>Seu carrinho</h2>
+        <button class="x" id="close" aria-label="Fechar carrinho">×</button>
+      </div>
+      <div class="items" id="items"></div>
+      <div class="tot"><span>Total</span><span id="tot">R$ 0,00</span></div>
+      <p class="ship" id="ship"></p>
+      <button class="cta" id="buy" style="width: 100%">Finalizar compra</button>
+    </aside>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="javascript/script.js"></script>
+  </body>
+</html>
