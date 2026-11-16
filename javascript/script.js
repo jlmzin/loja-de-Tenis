@@ -70,6 +70,38 @@ var $ = function (i) {
 var brl = function (v) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 };
+var revealObserver = null;
+var reduceMotion = window.matchMedia
+  ? window.matchMedia("(prefers-reduced-motion: reduce)")
+  : { matches: false };
+function watchReveals(scope) {
+  var els = (scope || document).querySelectorAll("[data-reveal]");
+  if (!els.length) return;
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+    [].forEach.call(els, function (el) {
+      el.classList.add("is-visible");
+    });
+    return;
+  }
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    );
+  }
+  [].forEach.call(els, function (el) {
+    if (el.classList.contains("is-visible")) return;
+    var delay = el.getAttribute("data-reveal-delay");
+    if (delay) el.style.setProperty("--reveal-delay", delay + "ms");
+    revealObserver.observe(el);
+  });
+}
 function shoe(p) {
   return '<img src="' + IMG[p.id] + '" alt="Tênis ' + p.n + '">';
 }
@@ -100,7 +132,7 @@ function filters() {
       chip(s, f.size === s, function () {
         f.size = f.size === s ? null : s;
         filters();
-        render();
+        render(true);
       }),
     );
   });
@@ -112,14 +144,14 @@ function filters() {
         function () {
           f.color = f.color === c ? null : c;
           filters();
-          render();
+          render(true);
         },
         COLORS[c],
       ),
     );
   });
 }
-function render() {
+function render(reveal) {
   var g = $("grid");
   g.innerHTML = "";
   var L = P.filter(function (p) {
@@ -135,10 +167,14 @@ function render() {
       '<div class="empty"><b>Nenhum tênis com esses filtros.</b><br>Tente outra cor ou tamanho, ou limpe os filtros.</div>';
     return;
   }
-  L.forEach(function (p) {
+  L.forEach(function (p, i) {
     if (f.size && p.s.indexOf(f.size) > -1 && !pick[p.id]) pick[p.id] = f.size;
     var c = document.createElement("article");
     c.className = "card";
+    if (reveal) {
+      c.setAttribute("data-reveal", "up");
+      c.style.setProperty("--reveal-delay", Math.min(i, 5) * 70 + "ms");
+    }
     c.innerHTML =
       '<div class="img">' +
       shoe(p) +
@@ -177,6 +213,7 @@ function render() {
     c.appendChild(a);
     g.appendChild(c);
   });
+  if (reveal) watchReveals(g);
 }
 function save() {
   try {
@@ -270,7 +307,7 @@ $("clr").onclick = function () {
   f = { size: null, color: null };
   pick = {};
   filters();
-  render();
+  render(true);
 };
 $("buy").onclick = function () {
   cart = [];
@@ -301,5 +338,6 @@ P.forEach(function (p) {
 });
 hero(1);
 filters();
-render();
+render(true);
 draw();
+watchReveals();

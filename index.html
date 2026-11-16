@@ -12,6 +12,9 @@
       href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Manrope:wght@400;600;800&display=swap"
     />
     <link rel="stylesheet" href="style.css/style.css" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <header>
@@ -26,14 +29,21 @@
     <main class="wrap">
       <section class="hero">
         <div>
-          <h1>Nike para cada passo.</h1>
-          <p>
+          <h1 data-reveal="up">Nike para cada passo.</h1>
+          <p data-reveal="up" data-reveal-delay="90">
             Corrida, rua ou quadra: escolha o tênis, o tamanho e a cor. Só
             mostramos o que está disponível no seu número.
           </p>
-          <a class="cta" href="#vitrine">Ver tênis Nike</a>
+          <a class="cta" data-reveal="up" data-reveal-delay="180" href="#vitrine"
+            >Ver tênis Nike</a
+          >
         </div>
-        <div class="stage" aria-live="polite">
+        <div
+          class="stage"
+          data-reveal="up"
+          data-reveal-delay="140"
+          aria-live="polite"
+        >
           <div id="heroShoe"></div>
           <div
             class="sw"
@@ -44,16 +54,22 @@
         </div>
       </section>
       <section class="perks">
-        <div><strong>Frete grátis</strong>em compras acima de R$ 399</div>
-        <div>
+        <div data-reveal="up">
+          <strong>Frete grátis</strong>em compras acima de R$ 399
+        </div>
+        <div data-reveal="up" data-reveal-delay="80">
           <strong>Troca em 30 dias</strong>se não servir, você troca sem custo
         </div>
-        <div><strong>Até 10x sem juros</strong>no cartão de crédito</div>
+        <div data-reveal="up" data-reveal-delay="160">
+          <strong>Até 10x sem juros</strong>no cartão de crédito
+        </div>
       </section>
 
       <section id="vitrine">
-        <h2 style="font-size: clamp(44px, 7vw, 80px)">Vitrine Nike</h2>
-        <div class="filters">
+        <h2 data-reveal="up" style="font-size: clamp(44px, 7vw, 80px)">
+          Vitrine Nike
+        </h2>
+        <div class="filters" data-reveal="up" data-reveal-delay="80">
           <div class="fg">
             <span id="lt">Tamanho</span>
             <div class="chips" id="fs" role="group" aria-labelledby="lt"></div>
@@ -64,12 +80,18 @@
           </div>
           <button class="clear" id="clr">Limpar filtros</button>
         </div>
-        <p class="count" id="cnt" aria-live="polite"></p>
+        <p
+          class="count"
+          id="cnt"
+          data-reveal="fade"
+          data-reveal-delay="120"
+          aria-live="polite"
+        ></p>
         <div class="grid" id="grid"></div>
       </section>
     </main>
     <footer>
-      <div class="wrap">
+      <div class="wrap" data-reveal="fade">
         JUNOIR: loja demonstrativa. Nike e Jordan são marcas registradas de seus
         respectivos titulares.
       </div>
